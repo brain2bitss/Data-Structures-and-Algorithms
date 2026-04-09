@@ -1,9 +1,9 @@
 class Solution {
     public int search(int[] nums, int target) {
         int left = 0;
-        if(nums[left] == target){
-            return 0;
-        }
+        // if(nums[left] == target){
+        //     return 0;
+        // }
         int right = nums.length - 1;
         int mid = 0; int result = -1;
         while(left <= right){
