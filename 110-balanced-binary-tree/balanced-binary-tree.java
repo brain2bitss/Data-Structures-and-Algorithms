@@ -14,28 +14,26 @@
  * }
  */
 class Solution {
-
-    public boolean isBalanced(TreeNode root) {
-        return dfs(root)[0] == 1;
-    }
-
-    private int[] dfs(TreeNode root) {
-
-        if (root == null) {
-            return new int[]{1, 0};
+    public int fun(TreeNode root){
+        if(root == null){
+            return 0;
         }
-
-        int[] left = dfs(root.left);
-        int[] right = dfs(root.right);
-
-        boolean balanced =
-                (left[0] == 1 &&
-                 right[0] == 1 &&
-                 Math.abs(left[1] - right[1]) <= 1);
-
-        return new int[]{
-                balanced ? 1 : 0,
-                1 + Math.max(left[1], right[1])
-        };
+        int leftheight = fun(root.left);
+        if(leftheight == -1){
+            return -1;
+        }
+        int rightheight = fun(root.right);
+        if(rightheight == -1){
+            return -1;
+        }
+        int diff = Math.abs(leftheight - rightheight);
+        
+        if(diff > 1){
+            return -1;
+        }
+        return Math.max(leftheight, rightheight) + 1;
+    }
+    public boolean isBalanced(TreeNode root) {
+        return fun(root) != -1;
     }
 }
