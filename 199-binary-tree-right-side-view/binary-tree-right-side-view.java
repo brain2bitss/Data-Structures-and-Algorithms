@@ -27,14 +27,12 @@ class Solution {
             for(int i = 0; i < qlen; i++){
                 TreeNode node = q.poll();
                 rightside = node;
-                // if(node != null){
-                    if(node.left != null){
-                        q.offer(node.left);
-                    }
-                    if(node.right != null){
-                        q.offer(node.right);
-                    }
-                // }
+                if(node.left != null){
+                    q.offer(node.left);
+                }
+                if(node.right != null){
+                    q.offer(node.right);
+                }
             }
             res.add(rightside.val);
         }
