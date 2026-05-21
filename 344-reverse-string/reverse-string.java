@@ -4,8 +4,7 @@ class Solution {
         int right = s.length - 1;
         while(left < right){
             char a = s[left];
-            char b = s[right];
-            s[left] = b;
+            s[left] = s[right];
             s[right] = a;
             left++;
             right--;
