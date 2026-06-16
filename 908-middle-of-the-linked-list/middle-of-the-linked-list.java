@@ -9,26 +9,14 @@
  * }
  */
 class Solution {
-    private int count; private int count2;
-    private ListNode target; private int result;
-    public void recursion_function(ListNode node){
-        if(node == null){
-            return;
-        }
-        count++;
-        recursion_function(node.next);
-        if(count%2 == 0){
-            result = count/2;
-        }else{
-            result = count/2 + 1;
-        }
-        count2++;
-        if(count2 == result){
-            target = node;
-        }    
-    }
     public ListNode middleNode(ListNode head) {
-        recursion_function(head);
-        return target;
+        ListNode slow = head;
+        ListNode fast = head; int count = 1;
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            count++;
+        }
+        return (fast.next != null) ? slow.next : slow;
     }
 }
