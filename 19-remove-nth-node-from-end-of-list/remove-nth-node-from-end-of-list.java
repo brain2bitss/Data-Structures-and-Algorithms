@@ -9,32 +9,28 @@
  * }
  */
 class Solution {
-    private ListNode target;
-    private int count;
-    public void recursion_fun(ListNode node, int n){
-        if( node == null ){
-            return;
-        }
-        recursion_fun(node.next, n);
-        count++;
-        if( count == n ){
-            target = node;
-        }
-    }
     public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head == null || head.next == null){
+            return null;
+        }
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
         
-        recursion_fun(head, n);
-        if(head == target){
-            return target.next;
+        ListNode slow = dummy;
+        ListNode fast = dummy;
+        
+        for (int i = 0; i <= n; i++) {
+            fast = fast.next;
         }
         
-        ListNode previous = head;
-        while( previous.next != target ){
-            previous = previous.next;
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
         }
         
-        previous.next = target.next;
+        slow.next = slow.next.next;
         
-        return head;
+        return dummy.next;
     }
 }
+
