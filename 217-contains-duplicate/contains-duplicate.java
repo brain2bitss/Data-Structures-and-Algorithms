@@ -1,11 +1,25 @@
-class Solution {
-    public boolean containsDuplicate(int[] nums) {
-        int array_length = nums.length;
-        HashMap<Integer, Integer> mp = new HashMap<>();
-        for(int i = 0; i < array_length; i++){
-            mp.put(nums[i],i);
+// class Solution {
+//     public boolean containsDuplicate(int[] nums) {
+//         int array_length = nums.length;
+//         HashMap<Integer, Integer> mp = new HashMap<>();
+//         for(int i = 0; i < array_length; i++){
+//             mp.put(nums[i],i);
+//         }
+//         int size_of_mp = mp.size();
+//         return size_of_mp != array_length;
+//     }
+// }
+
+class Solution{
+    public boolean containsDuplicate(int[] nums){
+        Set<Integer> map = new HashSet<>();
+        for(int i = 0; i < nums.length; i++){
+            if(map.contains(nums[i])){
+                return true;
+            }else{
+                map.add(nums[i]);
+            }
         }
-        int size_of_mp = mp.size();
-        return size_of_mp != array_length;
+        return false;
     }
 }
