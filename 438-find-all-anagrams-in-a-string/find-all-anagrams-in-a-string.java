@@ -3,35 +3,28 @@ class Solution {
         List<Integer> result = new ArrayList<>();
         if (s.length() < p.length()) return result;
         
-        int[] count = new int[26];
+        // Frequency arrays for characters 'a' to 'z'
+        int[] pCount = new int[26];
+        int[] sCount = new int[26];
         
+        // Initialize frequency count for pattern p
         for (char c : p.toCharArray()) {
-            count[c - 'a']++;
+            pCount[c - 'a']++;
         }
         
-        int matches = 0;  
-        int left = 0;
-        
-        for (int right = 0; right < s.length(); right++) {
-
-            int rightIdx = s.charAt(right) - 'a';
-            if (count[rightIdx] > 0) {
-                matches++;  
-            }
-            count[rightIdx]--;
+        // Sliding window over s
+        for (int i = 0; i < s.length(); i++) {
+            // Add current character to window
+            sCount[s.charAt(i) - 'a']++;
             
-            if (right - left + 1 == p.length()) {
-                
-                if (matches == p.length()) {
-                    result.add(left);
-                }
-                
-                int leftIdx = s.charAt(left) - 'a';
-                if (count[leftIdx] >= 0) {
-                    matches--; 
-                }
-                count[leftIdx]++;
-                left++;
+            // Remove character that's no longer in window
+            if (i >= p.length()) {
+                sCount[s.charAt(i - p.length()) - 'a']--;
+            }
+            
+            // Compare frequency arrays
+            if (Arrays.equals(sCount, pCount)) {
+                result.add(i - p.length() + 1);
             }
         }
         
