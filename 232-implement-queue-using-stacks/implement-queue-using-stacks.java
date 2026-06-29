@@ -6,25 +6,29 @@ class MyQueue {
     }
     
     public void push(int x) {
-        while(!stack2.isEmpty()){
-            stack1.push(stack2.pop());
-        }
         stack1.push(x);
-        while(!stack1.isEmpty()){
-            stack2.push(stack1.pop());
-        }
     }
     
     public int pop() {
+        if(stack2.isEmpty()){
+            while(!stack1.isEmpty()){
+                stack2.push(stack1.pop());
+            }
+        }
         return stack2.pop();
     }
     
     public int peek() {
+        if(stack2.isEmpty()){
+            while(!stack1.isEmpty()){
+                stack2.push(stack1.pop());
+            }
+        }
         return stack2.peek();
     }
     
     public boolean empty() {
-        return stack2.isEmpty();
+        return stack2.isEmpty() && stack1.isEmpty();
     }
 }
 
