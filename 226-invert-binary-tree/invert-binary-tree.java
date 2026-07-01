@@ -23,8 +23,8 @@ class Solution {
         root.right = root.left;
         root.left = temp;
 
-        invertTree(root.left);
         invertTree(root.right);
+        invertTree(root.left);
 
         return root;
     }
