@@ -19,16 +19,10 @@ class Solution {
             return 0;
         }
         int leftheight = fun(root.left);
-        if(leftheight == -1){
-            return -1;
-        }
         int rightheight = fun(root.right);
-        if(rightheight == -1){
-            return -1;
-        }
         int diff = Math.abs(leftheight - rightheight);
         
-        if(diff > 1){
+        if(diff > 1 || leftheight == -1 || rightheight == -1){
             return -1;
         }
         return Math.max(leftheight, rightheight) + 1;
